@@ -10,8 +10,10 @@ No frameworks, no dependencies, just a fetch-decode-execute loop over raw machin
 |------|-------------|
 | R-type | `ADD` `SUB` `XOR` `OR` `AND` |
 | I-type (ALU) | `ADDI` `XORI` `ORI` `ANDI` |
-| I-type (Load) | `LB` `LH` `LW` `LBU` `LHU` *(decode only)* |
-| S-type (Store) | `SB` `SH` `SW` *(decode only)* |
+| I-type (Load) | `LB` `LH` `LW` `LBU` `LHU` |
+| S-type (Store) | `SB` `SH` `SW` |
+| U-type | `LUI` `AUIPC` |
+| System | `ECALL` `EBREAK` |
 
 ## Quick Start
 
@@ -34,14 +36,15 @@ _start:
     addi x29, x0, 18
     add  x30, x29, x28
     sub  x31, x28, x29
+    ebreak
 ```
 
 ```
 Rabbit: RISC-V (RV64I) Emulator
-Loaded 4 instruction(s)
+Loaded 5 instruction(s)
 
-Hit zero instruction at pc = 0x80000010, halting.
-pc = 0x80000010
+EBREAK at pc = 0x80000010, halting.
+pc  = 0x80000010
 x28 = 0x57 (87)
 x29 = 0x12 (18)
 x30 = 0x69 (105)
@@ -52,13 +55,14 @@ Execution Completed!
 
 ## Roadmap
 
-- [ ] Load/store execution
-- [ ] Multi-byte bus operations
+- [x] Load/store execution
+- [x] Multi-byte bus operations
+- [x] `LUI`, `AUIPC`
+- [x] `ECALL` / `EBREAK`
 - [ ] Branches (B-type)
-- [ ] `LUI`, `AUIPC`, `JAL`, `JALR`
+- [ ] `JAL`, `JALR`
 - [ ] Shifts and comparisons
 - [ ] RV64I word ops (`ADDW`, `SUBW`, etc.)
-- [ ] `ECALL` / `EBREAK`
 - [ ] UART
 
 ## License

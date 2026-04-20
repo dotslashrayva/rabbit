@@ -11,3 +11,5 @@ _start:
     xori t1, t5, 0b0011
     ori t2, t5, 0b0011
     andi t3, t5, 0b0011
+
+    ebreak

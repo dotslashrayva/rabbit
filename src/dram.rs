@@ -16,7 +16,6 @@ impl Dram {
         self.data[addr as usize]
     }
 
-    #[allow(dead_code)]
     pub fn write(&mut self, addr: u64, val: u8) {
         self.data[addr as usize] = val;
     }

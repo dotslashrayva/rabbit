@@ -5,3 +5,5 @@ _start:
 
     add x30, x29, x28
     sub x31, x28, x29
+
+    ebreak

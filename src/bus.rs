@@ -1,3 +1,4 @@
+use crate::dram::DRAM_SIZE;
 use crate::dram::Dram;
 
 // Base Address of RAM
@@ -21,18 +22,18 @@ impl Bus {
         self.ram.read(mem_addr)
     }
 
-    #[allow(dead_code)]
     pub fn write(&mut self, addr: u64, val: u8) {
         let mem_addr = self.translate(addr);
         self.ram.write(mem_addr, val);
     }
 
     fn translate(&self, addr: u64) -> u64 {
+        let offset = addr.wrapping_sub(DRAM_BASE_ADDR);
         assert!(
-            addr >= DRAM_BASE_ADDR,
-            "Bus error: invalid address 0x{:X}",
+            offset < DRAM_SIZE,
+            "Bus error: address 0x{:X} outside DRAM",
             addr
         );
-        return addr - DRAM_BASE_ADDR;
+        return offset;
     }
 }
